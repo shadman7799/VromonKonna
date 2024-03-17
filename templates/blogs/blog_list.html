@@ -1,0 +1,100 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="blog-post-area">
+    <section class="blog-search-sec">
+        <form action="../blogs/" method="get">
+            <div class="row">
+                <div class="col-md-3">
+                    <select name="filter" id="blog-search">
+                        {% if filter %}
+                        <option hidden>{{ filter }}</option>
+                        <option>See All</option>
+                        {% else %}
+                        <option hidden>See All</option>
+                        {% endif %}
+                        <option>Traveler</option>
+                        <option>Hotel</option>
+                    </select>
+                    <div class="packages-reset-icon">
+                        <a href="{% url 'blog_list' %}"><i class="fa-solid fa-rotate-left"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="search-box">
+                        <input type="text" name="dest" placeholder="Search by Destination" value="{{dest}}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="blog-list-btns">
+                        <button class="blog-search-btn" type="submit" value="Submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
+    <div class="row blog-found">
+        <h2>{{count}} blogs found</h2>
+    </div>
+
+    <div class="single-blog-post">
+        {% for blog in blogs %}
+        <section class="blog-post-section">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="blog-post-img">
+                        <img src="{{ blog.image.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="blog-post-header">
+                                <h1>{{ blog.title }}</h1>
+                            </div>
+                        </div>
+                        <div class="col-md-3 offset-1">
+                            <div class="blog-list-bloger-info">
+                                {% if 'T' in blog.author.last_name %}
+                                <p>{{ blog.author.traveler.name }}</p>
+                                <img src="{{ blog.author.traveler.image.url }}" alt="">
+                                {% else %}
+                                <p>{{ blog.author.hotelrep.name }}</p>
+                                <img src="{{ blog.author.hotelrep.image.url }}" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="blog-post-description">
+                            <h6>{{ blog.destination }}</h6>
+                            <p>{{ blog.thoughts|truncatewords:90 }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row blog-list-bottom">
+                <div class="col-md-6 blog-list-bottom-desc">
+                    <p>Click on see more to see full post, like and comment.</p>
+                </div>
+                <div class="col-md-3 offset-3">
+                    <div class="blog-list-like-and-comment">
+                        <i class="fa-regular fa-thumbs-up like"></i>
+                        <p>{{ blog.likes }}</p>
+                        <i class="fa-regular fa-message"></i>
+                        <p>{{ blog.comments }}</p>
+                    </div>
+                    <a href="{% url 'blog_post' blog.pk %}" target="_blank"
+                        class="btn btn-primary blog-list-seeMore">See more</a>
+                </div>
+            </div>
+        </section>
+        {% endfor%}
+    </div>
+</body>
+
+{% endblock %}

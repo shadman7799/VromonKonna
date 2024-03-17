@@ -1,0 +1,49 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body class="hotel-profile-area">
+
+<section>
+    <div class="container">
+        <div class="row bookings-cont">
+            <div class="row">
+                <div class="col-md-9">
+                    <h5>Notifications</h5>
+                </div>
+                {% if notifications %}
+                {% for x in notifications %}
+                <div class="single-booking-box">
+                    <div class="row current-booking-body">
+                        <div class="col-md-9">
+                            <div class="user-profile-blog-desc">
+                                <p>{{ x.time }}</p>
+                                <p>{{ x.message }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="current-booking-btns">
+                                {% if x.is_blog %}
+                                <a href="{% url 'blog_post' x.key %}" class="current-booking-see-full-info-btn">View</a>
+                                {% else %}
+                                <a href="{% url 'pkg_info' x.key %}" class="current-booking-see-full-info-btn">View</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="offset-3 col-md-12 packages">
+                    <i class="fa-regular fa-map"></i>
+                    <p>No notifications!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+
+{% endblock %}

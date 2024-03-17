@@ -1,0 +1,104 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body class="packages-area">
+<div class="single-package-box">
+    <div class="row text-center single-package-box-not-bookable">
+        {% if 'H' in request.user.last_name and not author %}
+        <h1>You can't book packages using a Hotel account!</h1>
+        {% elif not bookable and 'T' in request.user.last_name %}
+        <h1>Not bookable right now!</h1>
+        {% elif conflict and not booked %}
+        <h1>Package schedule conflicts with other bookings!</h1>
+        {% endif %}
+    </div>
+    <section class="packages-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{ pkg.image.url }}" alt="">
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-8 packages-header-right">
+                            <div class="row">
+                                <div class="packages-title">
+                                    <h2>{{ pkg.title }}</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="edit-review-hotel-details packages-font">
+                                    <i class="fa-solid fa-hotel"></i>
+                                    <p>{{ pkg.author.name }}</p>
+                                    <p>{{ pkg.author.catagory }}</p>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="edit-review-date packages-date-font">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <p>{{pkg.start_date}} - {{pkg.end_date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="packages-cost-detail packages-info-start-icon">
+                                <h5>{{ pkg.cost }} BDT</h5>
+                                <i class="fa-solid fa-star"></i>
+                                <p>{{ pkg.rating }}({{ pkg.total }} reviews)</p>
+                            </div>
+                    
+                            <div class="packages-info-bk-btns">
+                                {% if author %}
+                                <div class="packages-info-bk-btns">
+                                    <a class="book-pac-btn" href="{% url 'traveler_list' pkg.pk %}">Traveler list</a>
+                                </div>
+                                {% elif not booked and not conflict and bookable and 'T' in request.user.last_name %}
+                                <div class="packages-info-bk-btns">
+                                    <a class="book-pac-btn" href="{% url 'book_pkg' pkg.pk %}">Book package</a>
+                                </div>
+                                {% elif booked and bookable %}
+                                <div class="packages-info-bk-btns">
+                                    <a class="current-booking-cancel-btn" href="{% url 'cancel_pkg' pkg.pk %}">Cancel booking</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="packages-info-description">
+                            <p>{{pkg.description|linebreaks}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row comments-sec">
+                <div class="col-md-2"><p>Reviews</p></div>
+                <div class="col-md-10">
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9 offset-3">
+                    {% for review in reviews %}
+                    <div class="single-review-comment-box">
+                        <div class="comments-details packages-review-comment-sec">
+                            <img src="{{ review.traveler.image.url }}" alt="">
+                            <h6>{{ review.traveler.name }} <span>{{ review.rating }} <i class="fa-solid fa-star"></i></span></h6>
+                            <br>
+                            <p>{{ review.description }} </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+</body>
+
+{% endblock %}
+

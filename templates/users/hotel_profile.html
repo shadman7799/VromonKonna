@@ -1,0 +1,179 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+{% block content %}
+<body class="hotel-profile-area">
+
+<section class="hotel-profile">
+    <div class="container">
+        <div class="row hotel-proile-cont">
+            <div class="col-md-3 hotel-profile-img">
+                <img src="{{data.image.url}}" alt="">
+            </div>
+
+            <div class="col-md-5 hotel-profile-details-one">
+                <h1>{{data.name}}</h1>
+                <div class="hotel-profile-details-one-info">
+                    <p><i class="fa-regular fa-star"></i>{{data.catagory}}</p>
+                    <p><i class="fa-solid fa-location-dot"></i>{{data.address}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 hotel-profile-details-two">
+                <div class="hotel-profile-details-two-info">
+                    <p><i class="fa-solid fa-phone"></i>{{data.hotline}}</p>
+                    <p><i class="fa-solid fa-envelope"></i>{{user.email}}</p>
+                </div>
+            </div>
+            <div class="hotel-profile-settings-icon">
+                <a href="/manage_hotel_profile/"><i class="fa-solid fa-gear"></i></a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row bookings-cont">
+            <div class="row">
+                {% if notifications %}
+                <div class="col-md-8 ">
+                    <h5>Notification</h5>
+                </div>
+                <div class="col-md-4 margin-right">
+                    <a href="{% url 'clear_all' %}" class="current-booking-see-post-btn">Clear all</a>
+                    <a href="{% url 'notifications' %}" class="current-booking-cancel-btn">See all</a>
+                </div>
+                {% else %}
+                <div class="col-md-9">
+                    <h5>Notification</h5>
+                </div>
+                <div class="col-md-3 hotel-profile-see-all-btn-sec ">
+                    <a href="{% url 'notifications' %}" class="hotel-profile-see-all-btn">See all</a>
+                </div>
+                {% endif %}
+                {% if notifications %}
+                {% for x in notifications %}
+                <div class="single-booking-box">
+                    <div class="row current-booking-body">
+                        <div class="col-md-9">
+                            <div class="user-profile-blog-desc">
+                                <p>{{ x.time }}</p>
+                                <p>{{ x.message }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="current-booking-btns">
+                                {% if x.is_blog %}
+                                <a href="{% url 'blog_post' x.key %}" class="current-booking-see-full-info-btn" target="_blank">View</a>
+                                {% else %}
+                                <a href="{% url 'pkg_info' x.key %}" class="current-booking-see-full-info-btn" target="_blank">View</a>
+                                {% endif %}
+                                <a href="{% url 'delete_msg' x.pk %}" class="current-booking-cancel-btn">X</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row hotel-package-cont">
+            <div class="col-sm-3">
+                <h5>Packages</h5>
+            </div>
+            {% if pkgs %}
+            <div class="col-md-9 current-booking-see-post-btn-area ">
+                <a href="{% url 'post_pkg' %}" class="current-booking-see-post-btn">Post</a>
+            </div>
+            {% for pkg in pkgs %}
+            <div class="single-booking-box">
+                <div class="row current-booking-body">
+                    <div class="col-md-6">
+                        <div class="traveler-travel-desc">
+                            <p>{{pkg.title}}</p>
+                            <p>{{pkg.destination}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-2">
+                        <div class="current-booking-btns">
+                            <a href="{% url 'pkg_info' pkg.pk %}" class="current-booking-see-full-info-btn" target="_blank">View</a>
+                            <a href="{% url 'edit_pkg' pkg.pk %}" class="current-booking-cancel-btn">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="offset-2  packages">
+                <i class="fa-regular fa-map"></i>
+                <p>No packages available!</p>
+                <a href="{% url 'post_pkg' %}" class="btn btn-primary">Post packages</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row bookings-cont">
+            <div class="row">
+                <div class="col-md-9">
+                    <h5>Blogs</h5>
+                </div>
+                {% if not blogs%}
+                <div class="col-md-12 packages">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <p>No Blog posted yet!</p>
+                    <a href="../blogs/post_blog" type="submit" class="btn btn-primary">Post blog</a>
+                </div>
+                {% else %}
+                <div class="col-md-3 current-booking-see-post-btn-area">
+                    <a href="../blogs/post_blog" class="current-booking-see-post-btn  emergency-margin">Post</a>
+                </div>
+                {% endif %}
+            </div>
+
+            {% for blog in blogs %}
+            <div class="single-booking-box">
+                <div class="row current-booking-body">
+                    <div class="col-md-6">
+                        <div class="user-profile-blog-desc">
+                            <p>{{ blog.title }}</p>
+                            <p>{{ blog.destination }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-2">
+                        <div class="current-booking-btns">
+                            <a href="{% url 'blog_post' blog.pk %}" class="current-booking-see-full-info-btn" target="_blank">View</a>
+                            <a href="{% url 'edit_blog' blog.pk %}" class="current-booking-cancel-btn">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<div class="row hotel-profile-logout-sec">
+    <div class="col-sm-12 text-center">
+        <a class="hotel-profile-log-btn" href="/logout/">Logout</a>
+
+    </div>
+</div>
+
+</body>
+
+{% endblock %}
+

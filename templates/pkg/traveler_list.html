@@ -1,0 +1,102 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body class="packages-area">
+
+<section class="packages-consumer-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 package-consumer-header-img">
+                <img src="{{ pkg.image.url }}" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12 packages-consumer-header-right">
+                        <div class="row">
+                            <div class="packages-title">
+                                <h2>{{ pkg.destination }}</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="edit-review-hotel-details packages-font">
+                                <i class="fa-solid fa-hotel"></i>
+                                <p>{{ pkg.author.name }}</p>
+                                <p>{{ pkg.author.catagory }}</p>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="edit-review-date packages-date-font">
+                                <i class="fa-solid fa-calendar"></i>
+                                <p>{{ pkg.start_date }} - {{ pkg.end_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="packages-consumer-cost-detail">
+                            <h5>{{ pkg.cost }} BDT</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="section package-consumer-footer-sec">
+    <div class="container package-consumers-booking">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Travelers</h5>
+            </div>
+            {% if bookings %}
+            <div class="col-md-6 traveller-list-footer-btn-sec">
+                <a class="traveller-list-footer-btn" href="{% url 'notify' pkg.pk %}">Notify travelers</a>
+            </div>
+            {% endif %}
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-info alert-section" data-closable="slide-out-right">
+                {{ msg }}
+                <button class="close" data-bs-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% for booking in bookings %}
+        <div class="single-consumer-details">
+            <div class="row package-consumer-footer-desc">
+                <div class="col-md-4">
+                    <img src="{{ booking.traveler.image.url }}" alt="">
+                    <p>{{ booking.traveler.name }}</p>
+                </div>
+                <div class="col-md-5">
+                    <i class="fa-solid fa-envelope"></i>
+                    <p>{{ booking.email }}</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>{{ booking.traveler.phone }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row package-consumers-booking-desc">
+            <div class="col-md-12 text-center no-bookings-icon">
+                <!--                <i class="fa-solid fa-circle-exclamation"></i>-->
+                <p>No bookings yet!</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+
+{% endblock %}
+
+

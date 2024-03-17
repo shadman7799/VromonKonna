@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Post blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="post-blog-area">
+    <form method="post" action="../post_blog/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <section class="post-blog-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 blog-post-left">
+                    <div class="post-blog-input-box">
+                        <input type="text" name="title" placeholder="Title" value="{{title}}" required>
+                    </div>
+                    <div class="post-blog-input-box">
+                        <input type="text" name="dest" placeholder="Destination" value="{{dest}}" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="post-blog-img">
+                        {% if image %}
+                            <img src="{{ image.image.url }}">
+                        {% else %}
+                            <img src="{% static 'images/default_blog.jpg' %}">
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="post-blog-change-photo">
+                                <input type="file" name="image" id="file" value="image" accept="image/*">
+                                <label class="post-blog-change-btn" for="file">
+                                    Change
+                                </label>
+                                <button type="submit" name="preview" class="post-blog-preview-btn">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="post_blog-desc">
+                        <div class="form-group">
+<!--                            <input type="text" class="form-control" name="text" placeholder="Write your thoughts and experience" value="{{thoughts}}" >-->
+                            <textarea class="form-control post-blog-txtarea" name="text" cols="64" rows="1" placeholder="Write your thoughts and experience" required>{{thoughts}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="post-blog-btns">
+                        <a href="{% url 'profile' %}" class="discard-btn">Discard</a>
+                        <button class="create-btn" type="submit" name="create">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+    </form>
+
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>	
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

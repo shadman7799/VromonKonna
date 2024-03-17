@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post review</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="edit-reviews-area">
+<form action="{{pkg.pk}}" method="post">
+    {% csrf_token %}
+    <section class="edit-review-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{ pkg.image.url }}" alt="">
+                </div>
+                <div class="col-md-9 edit-review-header-right">
+                    <div class="row">
+                        <div class="edit-review-title">
+                            <h2>{{ pkg.title }}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="edit-review-hotel-details">
+                            <i class="fa-solid fa-hotel"></i>
+                            <p>{{ pkg.author.name }}</p>
+                            <p>{{ pkg.author.catagory }}</p>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="edit-review-date">
+                            <i class="fa-solid fa-calendar"></i>
+                            <p>{{ pkg.start_date }} - {{ pkg.end_date }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="post-review-star-dropdown">
+                        <select name="rating" id="edit-review-dropdown">
+                            <option>5 star</option>
+                            <option>4 star</option>
+                            <option>3 star</option>
+                            <option>2 star</option>
+                            <option>1 star</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="post-blog-input-box edit-pack-height edit-review-desc">
+                    <div class="form-group">
+                        <textarea class="form-control edit-review-textarea" name="text" placeholder="Write your thoughts and experience"></textarea>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="edit-blog-btns">
+                        <a href="{% url 'profile' %}" class="discard-btn">Discard</a>
+                        <button class="create-btn" name="post" type="submit" value="Submit">Post</button>
+                    </div>
+                </div>
+            </div> 
+            
+            
+        </div>
+    </section>
+</form>
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

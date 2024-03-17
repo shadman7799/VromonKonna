@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="704" height="99.5" viewBox="0 0 704 99.5">
+  <g id="Developed_by" data-name="Developed by" transform="translate(-608 -931)">
+    <text id="Tonmoy" transform="translate(677 1016)" fill="#272626" font-size="28" font-family="Poppins-MediumItalic, Poppins" font-weight="500" font-style="italic"><tspan x="0" y="0">TONMOY</tspan></text>
+    <text id="Shadman" transform="translate(890 1016)" fill="#272626" font-size="28" font-family="Poppins-MediumItalic, Poppins" font-weight="500" font-style="italic"><tspan x="0" y="0">SHADMAN</tspan></text>
+    <text id="Turna" transform="translate(1120 1016)" fill="#272626" font-size="28" font-family="Poppins-MediumItalic, Poppins" font-weight="500" font-style="italic"><tspan x="0" y="0">TURNA</tspan></text>
+    <line id="Line_16" data-name="Line 16" x2="48" transform="translate(850 982.5) rotate(90)" fill="none" stroke="#272626" stroke-width="2"/>
+    <line id="Line_17" data-name="Line 17" x2="48" transform="translate(1075 982.5) rotate(90)" fill="none" stroke="#272626" stroke-width="2"/>
+    <g id="Group_500" data-name="Group 500" transform="translate(-0.5)">
+      <text id="Developed_by-2" data-name="Developed by" transform="translate(871 958)" fill="#272626" font-size="26" font-family="Poppins-Regular, Poppins"><tspan x="0" y="0">DEVELOPED BY</tspan></text>
+      <line id="Line_14" data-name="Line 14" x2="226" transform="translate(1086.5 949)" fill="none" stroke="#272626" stroke-width="2"/>
+      <line id="Line_15" data-name="Line 15" x2="226" transform="translate(608.5 949)" fill="none" stroke="#272626" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

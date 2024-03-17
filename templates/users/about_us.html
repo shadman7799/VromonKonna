@@ -1,0 +1,30 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<body class="about-us-area">
+    <section class="about-us-sec">
+        <div class="container">
+            <div class="row about-us-header-top">
+                <div class="col-md-7 greetings-img">
+                    <img src="{% static 'img/Greetings.svg' %}" alt="">
+                    <p class="about-us-descp">
+                     “Travel is the main thing you purchase that makes you more extravagant”. We at "Vromonkonna" stand by this and place value on fulfilling vacation aspirations that make you affluent indefinitely. We also maintain affordable packaging options for our middle-class clients. With our innovative planned event packages and other essential travel services, we have been taking great destinations for a very long time. We inspire our customers to live full lives filled with unforgettable travel experiences.<br><br>Sincerely, </p>
+                    <h6>Team Vromonkonna</h6>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static 'img/index.svg' %}" alt="">
+                </div>
+            </div>
+            <div class="row about-us-bottom">
+                <img src="{% static 'img/Developed by.svg' %}" alt="">
+            </div>
+        </div>
+    </section>
+
+</body>
+{% endblock %}
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<body class="join-us-area">
+
+
+<section class="join-us-cont">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="join-us-title text-center">
+                    <h1>Join us as</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-box single-line text-center">
+                    <img src="{% static 'img/traveler.svg' %}">
+                    <br>
+                    <a href="/traveler_reg/" class="btn btn-primary">Traveler</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-box text-center">
+                    <img src="{% static 'img/hotel.svg' %}">
+                    <br>
+                    <a href="/hotel_reg/" class="btn btn-primary">Hotel Rep</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+	
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>	
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

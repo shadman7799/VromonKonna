@@ -1,0 +1,98 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body class="blog-post-area">
+<section class="blog-post-section margin-top">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="blog-post-img">
+                <img src="{{ blog.image.url }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="blog-post-header">
+                        <h1>{{ blog.title|linebreaks }}</h1>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="bloger-info">
+                        <p>{{ author.name }}</p>
+                        <img src="{{ author.image.url }}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="blog-post-description">
+                    <h6>{{ blog.destination }}</h6>
+                    <p>{{ blog.thoughts|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row blog-post-like-comment">
+            <div class="col-md-3">
+                <div class="like-and-comment">
+                    <i class="fa-regular fa-thumbs-up like"></i>
+                    <p>{{ blog.likes }}</p>
+                    <i class="fa-regular fa-message"></i>
+                    <p>{{ total_comments }}</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="comment-details">
+                    <div class="form-group">
+                        <textarea class="form-control" name="text" placeholder="Type your comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-post-btns">
+                    <input type="hidden" name="blog" value="{{ blog.pk }}">
+                    <button class="comment-btn" type="submit" name="comment">Comment</button>
+                    {% if liked %}
+                    <button class="like-btn" type="submit" name="unlike">Unlike</button>
+                    {% else %}
+                    <button class="like-btn" type="submit" name="like">Like</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row comments-sec">
+        <div class="col-md-2"><p>Comments</p></div>
+        <div class="col-md-10">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9 offset-3">
+            {% for comment in comments %}
+            <div class="comments-details">
+                {% if 'T' in comment.author.last_name %}
+                <img src="{{ comment.author.traveler.image.url }}" alt="">
+                <h6>{{ comment.author.traveler.name }}</h6>
+                {% else %}
+                <img src="{{ comment.author.hotelrep.image.url }}" alt="">
+                <h6>{{ comment.author.hotelrep.name }}</h6>
+                {% endif %}
+                <br>
+                <p>{{ comment.comment }}</p>
+                {% if comment.author == request.user %}
+                <a href="{% url 'delete_comment' comment.pk %}" class="fa fa-trash" aria-hidden="true"></a>
+                {% endif%}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+</body>
+
+{% endblock %}

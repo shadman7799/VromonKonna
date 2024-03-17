@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="user-manage-area">
+<section class="user-profile-manage">
+    <div class="title"><h1>Edit information </h1></div>
+    <form method="post" action="/save_traveler_info/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="user-profile-manage-box">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="details">Full name</span>
+                    <br>
+                    <input type="text" name="name" placeholder="Full name" value="{{ data.name }}" required>
+                </div>
+
+                <div class="user-profile-manage-box">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="details">Phone number</span>
+                    <br>
+                    <input type="text" name="phone" placeholder="Phone number" value="{{data.phone}}" required>
+                </div>
+
+                <div class="user-profile-manage-box">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="details">Emergency number</span>
+                    <br>
+                    {% if data.emergency_phone %}
+                    <input type="text" name="e_phone" placeholder="Emergency number" value="{{data.emergency_phone}}"
+                           required>
+                    {% else %}
+                    <input type="text" name="e_phone" placeholder="Emergency number" required>
+                    {% endif %}
+                </div>
+
+                <div class="x">
+                    <i class=" ad-lg fa-solid fa-address-card"></i>
+                    <span class="details">Address</span>
+                    <br>
+                    <!--                        <input type="text" name="address" placeholder="Enter address" value="{{data.address}}" required>  -->
+                    <textarea name="address" class="traveler-manage-profile-textarea" cols="16" rows="2" required>{{data.address}}</textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="user-profile-manage-box">
+                            <i class="fa-solid fa-calendar"></i>
+                            <span class="details">Age</span>
+                            <br>
+                            <input type="text" name="age" placeholder="Age" value="{{data.age}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="user-profile-manage-box">
+                            <i class="fa-solid fa-house-medical"></i>
+                            <span class="details">Blood group</span>
+                            <br>
+                            <select name="blood_type" id="blood-group">
+                                <option>{{data.blood_type}}</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="user-manage-profile-right-area">
+                    <div class="user-profile-manage-img">
+                        <img src="{{ data.image.url }}">
+                    </div>
+                    <div class="user-change-photo">
+                        <input type="file" id="file" name="image" value="{{ data.image.url }}">
+                        <label for="file">Change</label>
+                        <button type="submit" class="preview-btn">Preview</button>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="two-factor-sec">
+                                <p>Two-factor <br> authentication</p>
+                                <select name="two-factor" id="two-factor-btn">
+                                    {% if 'OFF' in user.last_name %}
+                                    <option>OFF</option>
+                                    <option>ON</option>
+                                    {% else %}
+                                    <option>ON</option>
+                                    <option>OFF</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <a href="#" class="user-profile-change-pass">Change Password</a> -->
+                    <button type="submit" class="user-profile-change-pass" name="change_pass">Change Password</button>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="/traveler_profile/" class="user-profile-cancel">Cancel</a>
+                            <button type="submit" class="btn btn-primary user-profile-save" name="save">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

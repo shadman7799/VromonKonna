@@ -1,0 +1,100 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<body class="index-body">
+	<section class="solo-travel sec-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h1>Want to <br> travel solo?</h1>
+					<h3><i>Join us</i></h3>
+					<a href="{% url 'pkg_list' %}" class="btn btn-primary index-login">Packages</a>
+					<a href="{% url 'blog_list' %}" class="index-register">Blogs</a>
+				</div>
+				<div class="col-md-6">
+					<img src="{% static 'img/index.svg' %}">
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- packages section start -->
+	<section class="home-packages-sec">
+		<div class="container">
+			<div class="row text-center">
+				<h4>TOP PACKAGES</h4>
+			</div>
+			<div class="packages-slider our-slider owl-carousel owl-theme">
+				{% for pkg in pkgs %}
+				<div class="single-packages-slider single-packages-slider-align">
+					<a href="{% url 'pkg_info' pkg.pk %}" target="_blank"><img src="{{ pkg.image.url }}" alt=""></a>
+					<h6>{{ pkg.destination|truncatewords:3 }}</h6>
+					<p>{{ pkg.cost }} BDT</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- packages section end -->
+
+	<!-- why us section start -->
+	<section>
+		<div class="container">
+			<div class="why-us-area">
+				<div class="row">
+					<img src="{% static 'img/Why us.svg' %}" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- why us section end -->
+
+
+	<!-- Blog section start -->
+	<section class="home-blog-area">
+		<div class="container">
+			<div class="row text-center">
+				<h4>BLOGS</h4>
+			</div>
+
+			<div class="blogs-slider our-slider owl-carousel owl-theme">
+				{% for blog in blogs %}
+				<div class="single-packages-slider single-blog-slider">
+
+					<div class="blog-slider-title">
+						<img src="{{ blog.image.url }}" alt="">
+						<a href="{% url 'blog_post' blog.pk %}" target="_blank"><a href="{% url 'blog_post' blog.pk %}"
+								target="_blank">
+								<h6>{{ blog.title }}</h6>
+							</a>
+					</div>
+
+					<div class="single-blog-owner">
+						{% if 'T' in blog.author.last_name %}
+						<img src="{{ blog.author.traveler.image.url }}" alt="">
+						<p>{{ blog.author.traveler.name }}</p>
+						{% else %}
+						<img src="{{ blog.author.hotelrep.image.url }}" alt="">
+						<p>{{ blog.author.hotelrep.name }}</p>
+						{% endif %}
+					</div>
+				</div>
+				{% endfor%}
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+
+	<div class="row index-footer-area">
+		<h5>VROMONKONNA 2022</h5>
+	</div>
+	<div class="scroll-to-top">
+		<a href="#" class="go-top"><i class="fa-solid fa-arrow-up"></i></a>
+	</div>
+
+</body>
+{% endblock %}

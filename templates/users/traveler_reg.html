@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Traveler Resistration</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="reg-area">
+    <div class="registration-cont">
+        <div class="title">Traveler registration</div>
+        <form method="post" action="/traveler_reg/">
+            {% csrf_token %}
+            <div class="user-details">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="details">Full name</span>
+                            <input type="text" name = "name" placeholder="Enter your name" value="{{name}}" required>
+                        </div>                    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa fa-envelope"></i>
+                            <span class="details">Email</span>
+                            <input type="email" name = "email" placeholder="Enter your email" value="{{email}}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 address-input">
+                        <i class=" ad-lg fa-solid fa-address-card"></i>
+                        <span class="details">Address</span>
+                        <br>
+                        <textarea name="address" cols="64" rows="1" placeholder="Address" id="user-address" required>{{address}}</textarea>
+                    </div>
+                </div>
+
+                <div class="row padding-top">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="details">Phone number</span>
+                            <input type="text" name = "phone" placeholder="Enter your number" value="{{phone}}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="details">Emergency number</span>
+                            <input type="text" name = "e_phone" placeholder="Enter your number" value="{{e_phone}}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row padding-top">
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <i class="fa fa-paper-plane "></i>
+                              <span class="details">NID</span>
+                              <input type="text" name = "nid" placeholder="Enter your NID" value="{{nid}}" required>
+                          </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <i class="fa-solid fa-calendar"></i>
+                            <span class="details">Age</span>
+                            <input type="text" name = "age" placeholder="age" value="{{age}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-box">
+                            <i class="fa-solid fa-house-medical"></i>
+                            <span class="details">Blood group</span>
+                            <br>
+                            <select name="bg" id="blood-group">
+                                {% if bg %}
+                                    <option>{{bg}}</option>
+                                {% endif %}
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row padding-top">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <span class="details">Password</span>
+                            <input type="password" name = "pass1" placeholder="Enter your password" value="{{pass1}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <span class="details">Confirm password</span>
+                            <input type="password" name = "pass2" placeholder="Confirm your password" value="{{pass2}}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check d-flex ">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a class="tos" href="#!">Terms of service</a>
+                    </label>
+                  </div>
+                
+                <div class="register-button text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                </div>
+                {% if messages %}
+                    {% for msg in messages %}
+                    <p></p>
+                    <div class="alert alert-info " data-closable="slide-out-right">
+                        {{ msg|linebreaks }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+
+	
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>	
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

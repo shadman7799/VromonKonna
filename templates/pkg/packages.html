@@ -1,0 +1,95 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+<body class="packages-area">
+
+<section class="packages-search-sec">
+    <form action="../packages/" method="get">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="packages-range-dropdown-area">
+                    <div class="range-input-box">
+                        <input type="number" name="min" placeholder="Min" value="{{min}}">
+                    </div>
+                    <div class="range-input-box minus-sign">
+                        <input type="number" name="max" placeholder="Max" value="{{max}}">
+                    </div>
+                </div>
+                <div class="packages-reset-icon packages-reset-icon-margin">
+                    <a href="{% url 'pkg_list' %}"><i class="fa-solid fa-rotate-left"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="search-box">
+                    <input type="text" name="text" placeholder="Search by Hotel, Destination" value="{{text}}">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="blog-list-btns">
+                    <button class="blog-search-btn packages-search-btn-width" type="submit" value="Submit">Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<div class="row packages-blog-found">
+    <h2>{{count}} Packages found</h2>
+</div>
+<div class="single-package-box">
+    {% for pkg in pkgs %}
+    <section class="packages-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{ pkg.image.url }}" alt="">
+                </div>
+                <div class="col-md-7 packages-header-right">
+                    <div class="row">
+                        <div class="packages-title">
+                            <h2>{{ pkg.destination }}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="edit-review-hotel-details packages-font">
+                            <i class="fa-solid fa-hotel"></i>
+                            <p>{{ pkg.author.name }}</p>
+                            <p>{{ pkg.author.catagory }}</p>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="edit-review-date packages-date-font">
+                            <i class="fa-solid fa-calendar"></i>
+                            <p>{{pkg.start_date}} - {{pkg.end_date}}</p>
+                        </div>
+                        <div class="packages-description">
+                            <p>{{ pkg.description|truncatewords:60 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 positon-btn">
+                    <div class="packages-cost-detail">
+                        <h5>{{pkg.cost}} BDT</h5>
+                        <i class="fa-solid fa-star"></i>
+                        <p>{{pkg.rating}}({{pkg.total}} reviews)</p>
+                    </div>
+                    <div class="row positon-see-more-btn">
+                        <div class="col-md-12 packages-see_more-btn-margin">
+                            <a class="packages-see_more-btn" href="{% url 'pkg_info' pkg.pk %}" target="_blank">See more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+</div>
+
+</body>
+
+{% endblock %}
+
+
+
+

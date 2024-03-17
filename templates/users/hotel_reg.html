@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hotel Registration</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	
+</head>
+<body class="hotel-reg-area">
+    <div class="hotel-registration-cont">
+        <div class="title">Hotel representative registration</div>
+        <form method="post" action="/hotel_reg/">
+            {% csrf_token %}
+            <div class="user-details">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa fa-institution"></i>
+                            <span class="details">Hotel name</span>
+                            <input id="hotel_name" type="text" name = "name" placeholder="Hotel name" value="{{name}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa fa-envelope"></i>
+                            <span class="details">Email</span>
+                            <input id="hotel_email" type="email" name = "email" placeholder="Email" value="{{email}}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="address-input">
+                            <i class=" ad-lg fa-solid fa-address-card"></i>
+                            <span class="details">Address</span>
+                            <textarea name="address" cols="64" rows="1" placeholder="Address" id="user-address" required>{{address}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row padding-top">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="details">Hotline</span>
+                            <input id="hotel_hotline" type="text" name = "hotline" placeholder="Hotline" value="{{hotline}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa fa-star"></i>
+                            <span class="details">Category</span>
+                            <br>
+                            <select name="catagory" id="blood-group" >
+                                {% if catagory %}
+                                    <option>{{catagory}}</option>
+                                {% endif %}
+                                <option>5-Star Hotel</option>
+                                <option>4-Star Hotel</option>
+                                <option>3-Star Hotel</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row padding-top">
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <span class="details">Password</span>
+                            <input id="hotel_pass" type="password" name = "pass1"  placeholder="Enter your password" value="{{pass1}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <span class="details">Confirm password</span>
+                            <input id="hotel_con_pass" type="password" name = "pass2" placeholder="Confirm your password" value="{{pass2}}" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="register-button text-center">
+                    <button id="submit" type="submit" class="btn btn-primary btn-lg">Register</button>
+                </div>
+                {% if messages %}
+                    {% for msg in messages %}
+                    <p></p>
+                    <div class="alert alert-info " data-closable="slide-out-right">
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>	
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/custom.js'%}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="hotel-manage-area">
+    <section class="hotel-manage-profile">
+        <div class="container">
+            <form method="post" action="/save_hotel_info/" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row hotel-manage-profile-cont">
+                    <div class="col-md-12">
+                        <div class="hotel-manage-profile-header">
+                            <h1>Edit Information</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="user-profile-manage-box hotel-manage-box-margin">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="details">Name</span>
+                            <br>
+                            <input type="text" name="name" placeholder="Name" value="{{ data.name }}" required>
+                        </div>
+                    
+                        <div class="user-profile-manage-box hotel-manage-box-margin">
+                            <i class="fa-solid fa-phone"></i>
+                            <span class="details">Hotline</span>
+                            <br>
+                            <input type="text" name="hotline" placeholder="Hotline" value="{{ data.hotline }}" required>
+                        </div>
+                        <div class="x">
+                            <i class=" ad-lg fa-solid fa-address-card"></i>
+                            <span class="details">Address</span>
+                            <br>
+                            <textarea name="address" cols="15" class="manage-hotel-profile-txtarea" rows="2" required>{{data.address}}</textarea>
+                        </div>
+                        <div class="category-input-box">
+                            <i class="fa fa-star"></i>
+                            <span class="details">Category</span>
+                            <br>
+                            <select name="catagory" id="hotel-category" >
+                                {% if catagory %}
+                                    <option>{{catagory}}</option>
+                                {% endif %}
+                                <option>5-Star Hotel</option>
+                                <option>4-Star Hotel</option>
+                                <option>3-Star Hotel</option>
+                            </select>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="two-factor-sec mt-4">
+                                    <p>Two-factor <br> authentication</p>
+                                    <select name="two-factor" id="two-factor-btn">
+                                        {% if 'OFF' in user.last_name %}
+                                            <option>OFF</option>
+                                            <option>ON</option>
+                                        {% else %}
+                                            <option>ON</option>
+                                            <option>OFF</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+    
+                    </div>
+    
+                    <div class="col-md-5 offset-1">
+                        <div class="hotel-profile-manage-img">
+                            <img src="{{ data.image.url }}">
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="hotel-change-photo">
+                                    <input type="file" id="file" name="image" value="{{ data.image.url }}">
+                                    <label class="hote-change-btn" for="file">
+                                        Change
+                                    </label>
+                                    <button type="submit" class="hotel-preview-btn">Preview</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--<a href="#" class="hotel-profile-change-pass">Change Password</a>-->
+                            <button type="submit" class="hotel-profile-change-pass" name="change_pass">Change Password</button>
+                        </div>
+                        <div class="row hotel-manage-btns">
+                            <div class="col-md-12">
+                                <a href="/hotel_profile/" class="hotel-profile-cancel">Cancel</a>
+                                <button type="submit" class="btn btn-primary hotel-profile-save" name="save">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>	
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

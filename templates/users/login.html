@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="login-area">
+    <div class="login-cont container">
+        <div class="signup-form">
+            <form method="post" action="/login/">
+                {% csrf_token %}
+                <h2>Login</h2>
+                <p>Pioneering solo travel for women!</p>
+                <hr>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-paper-plane"></i>
+                            </span>                    
+                        </div>
+
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ email }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>                    
+                        </div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label"><input type="checkbox"> Remember me
+                    <a href="/forget_pass/">Forgot password?</a></label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                </div>
+                {% if messages %}
+                    {% for msg in messages %}
+                    <div class="alert alert-info alert-section" data-closable="slide-out-right">
+                        {{ msg }}
+                        <button class="close" data-bs-dismiss="alert">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+            <div class="text-center">Not registered yet? <a href="/join_us/">Create an account</a></div>
+        </div>
+    </div>   
+        
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>	
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+

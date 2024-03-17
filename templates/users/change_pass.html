@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Change password</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontAwesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="login-area">
+    <div class="login-cont container">
+        <div class="signup-form">
+            <form method="post" action="/change_pass/">
+                {% csrf_token %}
+                <h2>Reset password</h2>
+                <p>Enter the OTP that we just sent to your email account.</p>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-key"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="otp" placeholder="Enter OTP" value="{{ otp }}" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" name="pass1" placeholder="Enter new Password" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" name="pass2" placeholder="Confirm Password" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Change password</button>
+                </div>
+                {% if messages %}
+                    {% for msg in messages %}
+                    <div class="alert alert-info " data-closable="slide-out-right">
+                        {{ msg|linebreaks }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>   
+        
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>	
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+
+
